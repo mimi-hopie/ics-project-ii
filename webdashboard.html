@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nairobi BRT Enforcement Dashboard</title>
+    
+    <link rel="stylesheet" href="webdashboard.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="logo-box">+</div>
+            <div class="title">NAIROBI BRT ENFORCEMENT</div>
+            <div class="subtitle">UNAUTHORIZED VEHICLE LOG</div>
+        </div>
+        <div class="live-status">
+            <span class="live-dot"></span> LIVE — <span id="clock"></span> EAT
+        </div>
+    </header>
+
+    <div class="summary">
+        <h3>Total Incidents</h3>
+        <p class="count" id="totalCount">0</p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Plate</th>
+                <th>Type</th>
+                <th>Location</th>
+                <th class="sortable">Date and Time</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <tr>
+                <td colspan="5">Loading data from Firebase...</td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+    <script type="module" src="webdashboard.js"></script>
+</body>
+</html>

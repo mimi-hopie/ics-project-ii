@@ -1,0 +1,107 @@
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 20px 40px;
+    color: #333;
+}
+
+/* Header Styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #eaeaea;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.logo-box {
+    background-color: #c05a22;
+    color: white;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.title {
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+.subtitle {
+    color: #888;
+    font-size: 13px;
+    letter-spacing: 1px;
+    border-left: 1px solid #ccc;
+    padding-left: 15px;
+}
+.live-status {
+    color: #2e7d32;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.live-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #4caf50;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+/* Incident Summary */
+.summary {
+    margin-bottom: 20px;
+}
+.summary h3 {
+    color: #666;
+    font-size: 12px;
+    margin: 0 0 5px 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.summary .count {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+th {
+    text-align: left;
+    padding: 15px;
+    font-size: 11px;
+    color: #888;
+    text-transform: uppercase;
+    border-bottom: 1px solid #eee;
+    letter-spacing: 1px;
+}
+th.sortable {
+    color: #c05a22;
+    cursor: pointer;
+}
+td {
+    padding: 15px;
+    font-size: 13px;
+    border-bottom: 1px solid #eee;
+    color: #555;
+}
+.plate-number {
+    font-weight: bold;
+    color: #000;
+}
+.datetime-cell {
+    line-height: 1.4;
+}
