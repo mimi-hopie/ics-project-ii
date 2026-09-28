@@ -19,7 +19,7 @@ The system operates across several integrated layers:
 
 ## Technology Stack
 *   **Frontend Interface:** HTML5, CSS3, JavaScript (ES6), Firebase JS SDK.
-*   **Database:** Google Firebase Cloud Firestore[cite: 1].
+*   **Database:** Google Firebase Cloud Firestore.
 *   **IoT Hardware:** Arduino Uno R3, MFRC522 RFID Reader, HC-SR04 Ultrasonic Sensor, ESP8266 Wi-Fi Module.
 *   **Firmware:** C++ via Arduino IDE.
 *   **Blockchain:** Solidity, Ethereum Test Net.
