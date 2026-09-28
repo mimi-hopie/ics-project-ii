@@ -29,7 +29,7 @@ The NoSQL database relies on two primary collections to map vehicles to their re
 
 ### 1. `vehicles` Collection
 Stores registered vehicles and their BRT authorization status.
-*   **Document ID:** (e.g., `vehicle_001`)[cite: 1]
+*   **Document ID:** (e.g., `vehicle_001`)
 *   `registration_number` (String): The vehicle's license plate (e.g., "KBYA 123").
 *   `vehicle_type` (String): The classification of the vehicle (e.g., "Motorcycle", "PSV").
 *   `is_authorized_brt` (Boolean): Determines if the vehicle has BRT lane access permissions.
