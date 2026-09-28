@@ -10,7 +10,7 @@ To provide a cost-effective alternative to computationally expensive CCTV-based 
 
 ## System Architecture
 The system operates across several integrated layers:
-*   **IoT Edge Layer (Vehicle Detection):** An HC-SR04 ultrasonic sensor detects the physical presence of a vehicle in the lane[cite: 1]. An RC522 RFID reader then scans the vehicle's passive RFID tag.
+*   **IoT Edge Layer (Vehicle Detection):** An HC-SR04 ultrasonic sensor detects the physical presence of a vehicle in the lane. An RC522 RFID reader then scans the vehicle's passive RFID tag.
 *   **Processing Layer:** An Arduino Uno R3 serves as the main microcontroller, coordinating the sensors and evaluating the read data using C++ firmware. 
 *   **Network Layer:** An ESP8266 Wi-Fi module transmits the violation data from the edge device directly to the cloud database.
 *   **Application Layer:** A Google Firebase NoSQL database (Firestore) stores real-time vehicle authorization status and violation logs.
