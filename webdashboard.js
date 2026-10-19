@@ -70,9 +70,10 @@ function renderTable() {
             <td class="plate-number">${item.plate}</td>
             <td>${item.type}</td>
             <td>${item.location}</td>
-            <td class="datetime-cell">${item.formattedDate}<br><span style="color:#888; font-size:11px;">${item.formattedTime}</span></td>
-            <td class="blockchain-cell">${item.blockchainHash}</td>
+             <td class="blockchain-cell">${item.blockchainHash}</td>
             <td class="blockchain-cell">${item.blockchainTxId}</td>
+            <td class="datetime-cell">${item.formattedDate}<br><span style="color:#888; font-size:11px;">${item.formattedTime}</span></td>
+           
         `;
         tableBody.appendChild(tr);
     }
@@ -127,11 +128,12 @@ async function fetchAndRenderData() {
                 plate: plateDisplay,
                 type: vehicleType,
                 location: location,
+                blockchainHash: blockchainHash,
+                blockchainTxId: blockchainTxId,
                 timestampMs: timestampMs,
                 formattedDate: formattedDate,
                 formattedTime: formattedTime,
-                blockchainHash: blockchainHash,
-                blockchainTxId: blockchainTxId
+                
             };
         });
 
