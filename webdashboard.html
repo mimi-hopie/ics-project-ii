@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nairobi BRT Enforcement Dashboard</title>
-    
+    <title>Nairobi BRT Violations Dashboard</title>
     <link rel="stylesheet" href="webdashboard.css">
 </head>
 <body>
@@ -12,37 +11,37 @@
     <header>
         <div class="header-left">
             <div class="logo-box">+</div>
-            <div class="title">NAIROBI BRT ENFORCEMENT</div>
-            <div class="subtitle">UNAUTHORIZED VEHICLE LOG</div>
+            <div class="title">Nairobi BRT Violations Dashboard</div>
+            
         </div>
         <div class="live-status">
-            <span class="live-dot"></span> LIVE — <span id="clock"></span> EAT
+            <span class="live-dot"></span>LIVE &bull; <span id="clock">--:--</span>
         </div>
     </header>
 
-    <div class="summary">
-        <h3>Total Incidents</h3>
+    <section class="summary">
+        <h3>Total Violations</h3>
         <p class="count" id="totalCount">0</p>
-    </div>
+    </section>
 
     <table>
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Plate</th>
                 <th>Type</th>
                 <th>Location</th>
-                <th class="sortable">Date and Time</th>
+                <th class="sortable" id="sortDateHeader" title="Click to toggle sort order">
+                    Date &amp; Time <span id="sortIndicator">▼</span>
+                </th>
             </tr>
         </thead>
         <tbody id="tableBody">
             <tr>
-                <td colspan="5">Loading data from Firebase...</td>
+                <td colspan="4">Loading violation records...</td>
             </tr>
         </tbody>
     </table>
 
-    
     <script type="module" src="webdashboard.js"></script>
 </body>
 </html>
