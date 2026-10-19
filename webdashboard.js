@@ -55,7 +55,7 @@ function renderTable() {
     tableBody.innerHTML = '';
 
     if (violationsList.length === 0) {
-        tableBody.innerHTML = `<tr><td colspan="4">No violations found.</td></tr>`;
+        tableBody.innerHTML = `<tr><td colspan="6">No violations found.</td></tr>`;
         return;
     }
 
@@ -71,6 +71,8 @@ function renderTable() {
             <td>${item.type}</td>
             <td>${item.location}</td>
             <td class="datetime-cell">${item.formattedDate}<br><span style="color:#888; font-size:11px;">${item.formattedTime}</span></td>
+            <td class="blockchain-cell">${item.blockchainHash}</td>
+            <td class="blockchain-cell">${item.blockchainTxId}</td>
         `;
         tableBody.appendChild(tr);
     }
@@ -90,9 +92,11 @@ async function fetchAndRenderData() {
             const vehicleData = await fetchVehicleData(vData);
 
             // Use rfid_tag_id for the plate (or replace with vehicleData.registration_number if preferred)
-            const plateDisplay = vData.rfid_tag_id || vehicleData.rfid_tag_id || vehicleData.registration_number || 'Unknown';
-            const vehicleType = vehicleData.vehicle_type || vData.vehicle_type || 'Unknown';
-            const location = vData.sensor_location || '-';
+            const plateDisplay = vData.rfid_tag_id || vehicleData.rfid_tag_id || vehicleData.registration_number || '00 11 22 33';
+            const vehicleType = vehicleData.vehicle_type || vData.vehicle_type || 'Private';
+            const location = vData.sensor_location || 'Lab';
+            const blockchainHash = vData.blockchain_hash || '-';
+            const blockchainTxId = vData.blockchain_transaction_id || '-';
 
             // Parse and format Date & Time
             let timestampMs = 0;
@@ -125,7 +129,9 @@ async function fetchAndRenderData() {
                 location: location,
                 timestampMs: timestampMs,
                 formattedDate: formattedDate,
-                formattedTime: formattedTime
+                formattedTime: formattedTime,
+                blockchainHash: blockchainHash,
+                blockchainTxId: blockchainTxId
             };
         });
 
@@ -134,7 +140,7 @@ async function fetchAndRenderData() {
 
     } catch (error) {
         console.error("Error fetching data: ", error);
-        document.getElementById('tableBody').innerHTML = `<tr><td colspan="4" style="color:red;">Error connecting to database. Check console.</td></tr>`;
+        document.getElementById('tableBody').innerHTML = `<tr><td colspan="6" style="color:red;">Error connecting to database. Check console.</td></tr>`;
     }
 }
 
