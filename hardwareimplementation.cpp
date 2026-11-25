@@ -13,8 +13,8 @@
 Adafruit_PN532 nfc(PN532_SS);
 
 // Wi-Fi Credentials
-const char* ssid = "miminiphone";
-const char* password = "Silverlaptop2025&";
+const char* ssid = "";
+const char* password = "";
 
 // Google Cloud Firestore REST API URL
 const char* firestoreURL = "https://firestore.googleapis.com/v1/projects/ics-project-ii-509310/databases/ics-project-ii/documents/violations";
