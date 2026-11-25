@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nairobi BRT Violations Dashboard</title>
+    <link rel="stylesheet" href="webdashboard.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="logo-box">+</div>
+            <div class="title">NAIROBI BRT VIOLATIONS DASHBOARD</div>
+        </div>
+        <div class="header-right">
+            <div class="live-status">
+                <span class="live-dot"></span>LIVE &bull; <span id="clock">--:--</span>
+            </div>
+            <span id="userEmail" class="user-email"></span>
+            <button id="logoutBtn" class="btn-logout">Logout</button>
+        </div>
+    </header>
+
+    <section class="summary">
+        <h3>Total Violations</h3>
+        <p class="count" id="totalCount">0</p>
+    </section>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Plate</th>
+                <th>Type</th>
+                <th>Location</th>
+                <th>Blockchain Hash</th>
+                <th>Blockchain Transaction ID</th>
+                <th class="sortable" id="sortDateHeader" title="Click to toggle sort order">
+                    Date &amp; Time <span id="sortIndicator">▼</span>
+                </th>
+                <th>Edited</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <tr>
+                <td colspan="7">Loading violation records...</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script type="module" src="webdashboard.js"></script>
+</body>
+</html>
