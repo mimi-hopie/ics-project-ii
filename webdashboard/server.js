@@ -1,16 +1,8 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import { initializeApp } from "firebase/app";
-import { 
-    getFirestore, 
-    collection, 
-    getDocs, 
-    doc, 
-    getDoc, 
-    query, 
-    where 
-} from "firebase/firestore";
+import fs from "fs";
+import { Firestore } from "@google-cloud/firestore";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,15 +10,37 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Initialize Firebase
+app.use(express.json());
+
+// 1. Read service account
+const serviceAccount = JSON.parse(
+    fs.readFileSync(path.join(__dirname, "serviceAccountKey.json"), "utf8")
+);
+
+// 2. Initialize Firestore directly with the exact Project ID and Database ID
+const db = new Firestore({
+    projectId: "ics-project-ii-509310",
+    databaseId: "ics-project-ii",
+    credentials: {
+        client_email: serviceAccount.client_email,
+        private_key: serviceAccount.private_key
+    }
+});
+
+// Client config for frontend authentication
 const firebaseConfig = {
+    apiKey: "AIzaSyCcz2roxXctLoB_Mk2LsUKW4l1d3U6xd4k",
+    authDomain: "ics-project-ii.firebaseapp.com",
     projectId: "ics-project-ii-509310"
 };
-const firebaseApp = initializeApp(firebaseConfig);
-const db = getFirestore(firebaseApp, "ics-project-ii");
 
-// Serve static frontend files (HTML, CSS, JS) from the 'public' folder
+// Serve static frontend files from 'public'
 app.use(express.static(path.join(__dirname, "public")));
+
+// Endpoint to provide Firebase config to frontend scripts
+app.get("/api/firebase-config", (req, res) => {
+    res.json(firebaseConfig);
+});
 
 // Helper function to fetch vehicle details
 async function fetchVehicleData(vData) {
@@ -40,17 +54,14 @@ async function fetchVehicleData(vData) {
     if (!lookupKey) return vehicleData;
 
     // 1. Try fetching directly by document ID in "vehicles"
-    const vehicleRef = doc(db, "vehicles", String(lookupKey));
-    const vehicleSnap = await getDoc(vehicleRef);
-
-    if (vehicleSnap.exists()) {
-        return { ...vehicleData, ...vehicleSnap.data() };
+    const vehicleDoc = await db.collection("vehicles").doc(String(lookupKey)).get();
+    if (vehicleDoc.exists) {
+        return { ...vehicleData, ...vehicleDoc.data() };
     }
 
     // 2. Fallback: Query "vehicles" collection where rfid_tag_id matches
     if (vData.rfid_tag_id) {
-        const q = query(collection(db, "vehicles"), where("rfid_tag_id", "==", vData.rfid_tag_id));
-        const querySnap = await getDocs(q);
+        const querySnap = await db.collection("vehicles").where("rfid_tag_id", "==", vData.rfid_tag_id).get();
         if (!querySnap.empty) {
             return { ...vehicleData, ...querySnap.docs[0].data() };
         }
@@ -62,8 +73,10 @@ async function fetchVehicleData(vData) {
 // API Route to get all violations
 app.get("/api/violations", async (req, res) => {
     try {
-        const violationsCol = collection(db, "violations");
-        const violationSnapshot = await getDocs(violationsCol);
+        console.log("--> Fetching from project: ics-project-ii-509310 | database: ics-project-ii | collection: violations");
+
+        const violationSnapshot = await db.collection("violations").get();
+        console.log(`--> Retrieved ${violationSnapshot.size} records.`);
 
         const rowPromises = violationSnapshot.docs.map(async (violationDoc) => {
             const vData = violationDoc.data();
