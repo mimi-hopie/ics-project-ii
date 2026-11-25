@@ -13,8 +13,12 @@
             <div class="logo-box">+</div>
             <div class="title">NAIROBI BRT VIOLATIONS DASHBOARD</div>
         </div>
-        <div class="live-status">
-            <span class="live-dot"></span>LIVE &bull; <span id="clock">--:--</span>
+        <div class="header-right">
+            <div class="live-status">
+                <span class="live-dot"></span>LIVE &bull; <span id="clock">--:--</span>
+            </div>
+            <span id="userEmail" class="user-email"></span>
+            <button id="logoutBtn" class="btn-logout">Logout</button>
         </div>
     </header>
 
@@ -34,15 +38,16 @@
                 <th class="sortable" id="sortDateHeader" title="Click to toggle sort order">
                     Date &amp; Time <span id="sortIndicator">▼</span>
                 </th>
+                <th>Edited</th>
             </tr>
         </thead>
         <tbody id="tableBody">
             <tr>
-                <td colspan="6">Loading violation records...</td>
+                <td colspan="7">Loading violation records...</td>
             </tr>
         </tbody>
     </table>
 
-    <script src="webdashboard.js"></script>
+    <script type="module" src="webdashboard.js"></script>
 </body>
 </html>

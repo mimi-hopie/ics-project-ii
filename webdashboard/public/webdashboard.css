@@ -15,7 +15,7 @@ header {
     padding-bottom: 15px;
     margin-bottom: 30px;
 }
-.header-left {
+.header-left, .header-right {
     display: flex;
     align-items: center;
     gap: 15px;
@@ -32,13 +32,6 @@ header {
     letter-spacing: 1px;
     font-size: 14px;
 }
-.subtitle {
-    color: #888;
-    font-size: 13px;
-    letter-spacing: 1px;
-    border-left: 1px solid #ccc;
-    padding-left: 15px;
-}
 .live-status {
     color: #2e7d32;
     font-size: 12px;
@@ -52,6 +45,26 @@ header {
     background-color: #4caf50;
     border-radius: 50%;
     margin-right: 5px;
+}
+.user-email {
+    font-size: 12px;
+    color: #666;
+    border-left: 1px solid #ddd;
+    padding-left: 15px;
+}
+.btn-logout {
+    background-color: transparent;
+    border: 1px solid #c05a22;
+    color: #c05a22;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.btn-logout:hover {
+    background-color: #c05a22;
+    color: white;
 }
 
 /* Incident Summary */
@@ -116,4 +129,132 @@ td {
     color: #444;
     word-break: break-all;
     max-width: 240px;
+}
+
+/* --- Login / Sign Up Page Styling --- */
+.auth-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0;
+}
+.auth-card {
+    background: white;
+    width: 100%;
+    max-width: 380px;
+    padding: 35px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-radius: 6px;
+}
+.auth-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+.auth-tabs {
+    display: flex;
+    border-bottom: 2px solid #eee;
+    margin-bottom: 20px;
+}
+.auth-tab {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.auth-tab.active {
+    color: #c05a22;
+    border-bottom: 2px solid #c05a22;
+    margin-bottom: -2px;
+}
+.auth-error {
+    color: #d32f2f;
+    font-size: 12px;
+    min-height: 18px;
+    margin: 0 0 10px 0;
+}
+.form-group {
+    margin-bottom: 16px;
+}
+.form-group label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+.form-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+.form-group input:focus {
+    outline: none;
+    border-color: #c05a22;
+}
+.btn-primary {
+    width: 100%;
+    background-color: #c05a22;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.btn-primary:hover {
+    background-color: #a74c1b;
+}
+.divider {
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+}
+.divider::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #eee;
+}
+.divider span {
+    background: white;
+    padding: 0 10px;
+    color: #999;
+    font-size: 11px;
+    position: relative;
+}
+.btn-google {
+    width: 100%;
+    background: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #444;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.btn-google:hover {
+    background-color: #f7f7f7;
 }

@@ -1,12 +1,48 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+
 let violationsList = [];
 let sortDescending = true; // Default: newest violations first
+
+// Verify authentication before loading dashboard data
+async function initDashboard() {
+    try {
+        const configRes = await fetch('/api/firebase-config');
+        const firebaseConfig = await configRes.json();
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                // Not logged in -> send to login page
+                window.location.href = '/login.html';
+            } else {
+                // Logged in -> show user email and load violations
+                const userEmailEl = document.getElementById('userEmail');
+                if (userEmailEl) userEmailEl.innerText = user.email;
+                fetchAndRenderData();
+            }
+        });
+
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', async () => {
+                await signOut(auth);
+                window.location.href = '/login.html';
+            });
+        }
+    } catch (error) {
+        console.error("Auth initialization failed:", error);
+    }
+}
 
 function renderTable() {
     const tableBody = document.getElementById('tableBody');
     tableBody.innerHTML = '';
 
     if (violationsList.length === 0) {
-        tableBody.innerHTML = `<tr><td colspan="6">No violations found.</td></tr>`;
+        tableBody.innerHTML = `<tr><td colspan="7">No violations found.</td></tr>`;
         return;
     }
 
@@ -24,6 +60,7 @@ function renderTable() {
             <td class="blockchain-cell">${item.blockchainHash}</td>
             <td class="blockchain-cell">${item.blockchainTxId}</td>
             <td class="datetime-cell">${item.formattedDate}<br><span style="color:#888; font-size:11px;">${item.formattedTime}</span></td>
+            <td class="blockchain-cell">${item.edited}</td>
         `;
         tableBody.appendChild(tr);
     }
@@ -43,7 +80,7 @@ async function fetchAndRenderData() {
         renderTable();
     } catch (error) {
         console.error("Error fetching data: ", error);
-        document.getElementById('tableBody').innerHTML = `<tr><td colspan="6" style="color:red;">Error connecting to server. Check console.</td></tr>`;
+        document.getElementById('tableBody').innerHTML = `<tr><td colspan="7" style="color:red;">Error connecting to server. Check console.</td></tr>`;
     }
 }
 
@@ -73,5 +110,5 @@ setInterval(() => {
     }
 }, 1000);
 
-// Execute data fetch
-fetchAndRenderData();
+// Initialize Auth & Dashboard
+initDashboard();
